@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="单曲循环"
+        android:id="@+id/oneloop">
+    </item>
+
+    <item
+        android:title="列表循环"
+        android:id="@+id/listloop">
+
+    </item>
+
+    <item
+        android:title="随机循环"
+        android:id="@+id/loop">
+
+    </item>
+</menu>
