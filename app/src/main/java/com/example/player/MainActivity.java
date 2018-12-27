@@ -5,8 +5,6 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -296,6 +294,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         seekbar.setProgress(mediaPlayer.getCurrentPosition());
                     }
                 }
+
             },0,50);
 
         } catch (IOException e) {
@@ -315,8 +314,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MySeekBar implements SeekBar.OnSeekBarChangeListener {
 
-        public void onProgressChanged(SeekBar seekBar, int progress,
-                                      boolean fromUser) {
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         }
 
         /*滚动时,应当暂停后台定时器*/
@@ -343,19 +341,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int num = random.nextInt(6) + 0;
         switch (item.getItemId()) {
             case R.id.oneloop://监听菜单按钮
-                final String p0 = list.get(currIndex1).path;
+//                final String p0 = list.get(currIndex1).path;
 //                while(!mediaPlayer.isPlaying()){
 //                    play(p0);
 //                }
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        play(p0);
-                    }
-                });
+//                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                    @Override
+//                    public void onCompletion(MediaPlayer mp) {
+//                        mediaPlayer.setLooping(true);
+//                    }
+//                });
+                boolean oloop = mediaPlayer.isLooping();
+                if(oloop) {
+                    mediaPlayer.setLooping(!oloop);
+                }
+                else {
+                    mediaPlayer.setLooping(!oloop);
+                }
                 break;
             case R.id.listloop:
-                if ((currIndex1 + 1) != (list.size())) {
+//                while ((currIndex1 + 1) < (list.size())) {
+//                    Log.d("MainActivity","aaa");
                     currIndex1++;
                     final String p1 = list.get(currIndex1).path;
 //                    while(!mediaPlayer.isPlaying()) {
@@ -367,22 +373,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             play(p1);
                         }
                     });
-                }
+//                }
                 break;
             case R.id.loop:
-                final String p2 = list.get(num).path;
+//                while ((currIndex1 + 1) < (list.size())) {
+                    final String p2 = list.get(num).path;
 //              while(!mediaPlayer.isPlaying()) {
 //                    play(p3);
 //              }
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        play(p2);
-                    }
-                });
-                currIndex1 = num;
-                break;
-        }
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            play(p2);
+                        }
+                    });
+                    currIndex1 = num;
+                    num = random.nextInt(6) + 0;
+                    break;
+                }
+//        }
         return super.onOptionsItemSelected(item);
     }
 }

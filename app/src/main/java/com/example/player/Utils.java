@@ -25,6 +25,7 @@ public class Utils {
         Cursor cursor = context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
                 , null, null, null, MediaStore.Audio.AudioColumns.IS_MUSIC);
 
+
         if (cursor != null) {
             while (cursor.moveToNext()) {
 
@@ -52,8 +53,6 @@ public class Utils {
         return list;
 
     }
-
-
     //    转换歌曲时间的格式
     public static String formatTime(int time) {
         if (time / 1000 % 60 < 10) {
